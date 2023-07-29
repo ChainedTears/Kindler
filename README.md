@@ -5,8 +5,7 @@
 <p align="center">To install, download the source code of this Github repository, extract the zip file, and copy/paste the whole content inside the root directory of your Kindle with your computer. (You can remove the 2 showcase images)</p>
 
 <h1 align="center">Usage Guide</h1>
-<p align="center">To use Kindler, simply launch the <code>Experimental Browser</code> app on your Kindle. Then, type in this URL:</p>
-<p align="center"><code>file:///mnt/us/index.html</code></p>
+<p align="center">To use Kindler, simply launch the <code>Experimental Browser</code> app on your Kindle. Then, type in this URL: <code>file:///mnt/us/index.html</code></p>
 <p align="center">After that, Kindler will be ready to use! Be sure to bookmark the page on your Kindle to access it again!</p>
 
 <h1 align="center">Disclaimer</h1>
