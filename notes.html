@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Notepad</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    textarea {
+      width: 100%;
+      height: 400px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Simple Notepad</h1>
+  <textarea id="notepad-content"></textarea>
+
+  <script>
+    const notepadContent = document.getElementById('notepad-content');
+
+    // Load saved content from Local Storage (if available)
+    window.onload = function () {
+      const savedContent = localStorage.getItem('notepadContent');
+      if (savedContent) {
+        notepadContent.value = savedContent;
+      }
+    };
+
+    // Save content to Local Storage whenever there is a change
+    notepadContent.addEventListener('input', function () {
+      const content = notepadContent.value;
+      localStorage.setItem('notepadContent', content);
+    });
+  </script>
+</body>
+</html>

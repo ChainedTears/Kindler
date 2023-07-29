@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Date and Time Display</title>
+    <style>
+      body {
+        font-family: arial;
+        text-align: center;
+      }
+      .time {
+        font-size: 100px;
+      }
+      .date {
+        font-size: 75px;
+      }
+      #toggleButton {
+        border-radius: 15px;
+        padding: 15px;
+        font-size: 25px;
+      }
+    </style>
+</head>
+<body>
+    <div class="time" id="timeDisplay"></div>
+  <div class="date" id="dateDisplay"></div>
+  <br>
+    <button id="toggleButton">Toggle Time Format</button>
+    <script>
+        function getTimeString() {
+            var currentTime = new Date();
+            var hours = currentTime.getHours();
+            var minutes = currentTime.getMinutes();
+            var seconds = currentTime.getSeconds();
+
+            // Convert to 12-hour format
+            var ampm = hours >= 12 ? 'PM' : 'AM';
+            var twelveHourFormat = ((hours + 11) % 12 + 1) + ":" + minutes + ":" + seconds + " " + ampm;
+
+            // Return time based on the current time format setting
+            return is24HourFormat ? currentTime.toTimeString().slice(0, 8) : twelveHourFormat;
+        }
+
+        function getDateString() {
+            var currentDate = new Date();
+            var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            return currentDate.toLocaleDateString(undefined, options);
+        }
+
+        var is24HourFormat = true;
+        var timeDisplay = document.getElementById('timeDisplay');
+        var dateDisplay = document.getElementById('dateDisplay');
+        var toggleButton = document.getElementById('toggleButton');
+
+        function updateTimeAndDate() {
+            timeDisplay.textContent = getTimeString();
+            dateDisplay.textContent = getDateString();
+        }
+
+        updateTimeAndDate();
+
+        toggleButton.addEventListener('click', function () {
+            is24HourFormat = !is24HourFormat;
+            updateTimeAndDate();
+        });
+
+        // Update the time and date every second
+        setInterval(updateTimeAndDate, 1000);
+    </script>
+</body>
+</html>

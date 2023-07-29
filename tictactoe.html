@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tic Tac Toe</title>
+  <style>
+    body {
+      font-family: Arial;
+    }
+  </style>
+</head>
+<body>
+  <table id="board" border="1" cellspacing="0" cellpadding="10">
+    <tr>
+      <td onclick="handleClick(0)"></td>
+      <td onclick="handleClick(1)"></td>
+      <td onclick="handleClick(2)"></td>
+    </tr>
+    <tr>
+      <td onclick="handleClick(3)"></td>
+      <td onclick="handleClick(4)"></td>
+      <td onclick="handleClick(5)"></td>
+    </tr>
+    <tr>
+      <td onclick="handleClick(6)"></td>
+      <td onclick="handleClick(7)"></td>
+      <td onclick="handleClick(8)"></td>
+    </tr>
+  </table>
+  <div id="message" style="text-align: center; font-size: 24px; margin-top: 20px;"></div>
+  <button onclick="restartGame()" style="display: block; margin: 20px auto; padding: 10px 20px; font-size: 18px; background-color: #007bff; color: #fff; border: none; border-radius: 5px; cursor: pointer;">Reset</button>
+
+  <h1>Due to CSS limitations on Kindle Paperwhites, the tic-tac-toe table could only go that big. Sorry for the inconvienience!</h1>
+
+  <script>
+    var board = ['', '', '', '', '', '', '', '', ''];
+    var currentPlayer = 'X';
+    var gameEnded = false;
+
+    function checkWinner() {
+      var winPatterns = [
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        [0, 4, 8],
+        [2, 4, 6]
+      ];
+
+      for (var i = 0; i < winPatterns.length; i++) {
+        var pattern = winPatterns[i];
+        var a = pattern[0];
+        var b = pattern[1];
+        var c = pattern[2];
+
+        if (board[a] && board[a] === board[b] && board[a] === board[c]) {
+          return pattern;
+        }
+      }
+
+      return null;
+    }
+
+    function checkDraw() {
+      return board.every(function(cell) {
+        return cell !== '';
+      });
+    }
+
+    function handleClick(index) {
+      if (!board[index] && !gameEnded) {
+        board[index] = currentPlayer;
+        document.getElementById('board').rows[Math.floor(index / 3)].cells[index % 3].innerText = currentPlayer;
+        var winPattern = checkWinner();
+
+        if (winPattern) {
+          gameEnded = true;
+          for (var i = 0; i < winPattern.length; i++) {
+            var cellIndex = winPattern[i];
+            document.getElementById('board').rows[Math.floor(cellIndex / 3)].cells[cellIndex % 3].style.backgroundColor = '#aaffaa';
+          }
+          document.getElementById('message').innerText = currentPlayer + ' wins!';
+        } else if (checkDraw()) {
+          gameEnded = true;
+          document.getElementById('message').innerText = "It's a draw!";
+        } else {
+          currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+        }
+      }
+    }
+
+    function restartGame() {
+      board = ['', '', '', '', '', '', '', '', ''];
+      currentPlayer = 'X';
+      gameEnded = false;
+      var cells = document.getElementById('board').getElementsByTagName('td');
+      for (var i = 0; i < cells.length; i++) {
+        cells[i].innerText = '';
+        cells[i].style.backgroundColor = '';
+      }
+      document.getElementById('message').innerText = '';
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<html>
+  <head>
+    <style>
+      body {
+        text-align: center;
+        font-family: 'Cursive', Arial;
+      }
+      a {
+        font-size: 25px;
+      }
+      button {
+        padding: 15px;
+        border-radius: 15px;
+        
+      }
+    </style>
+    <title>Arthur's Kindle Games & Utilities Launcher</title>
+  </head>
+  <h1>Skyhax - Kindler</h1>
+  <p>Again; due to CSS and Javascript (ES5 or lower) limitations on the Kindle Paperwhite, I am unable to style this website to my heart's liking and I am very annoyed so this message will be everywhere :)</p>
+  <p>If you lose this page, remember that it's in this URL: file:///mnt/us/</p>
+  <hr>
+  <p><a href="https://github.com/martin-at-ipal/kindle-web-tools">Content until next line made by this guy</a></p>
+  <h2>Get a message on the screen when you close your kindle:</h2>
+  <p>Add "?alert('Message content here')" after the current URL. Make sure to close your kindle before dismissing the alert!</p>
+  <h2>Calculator:</h2>
+  <p>Add "?25*4+1" and replace "25*4+1" with whatever calculator expressions you want to use.</p>
+  <h2>Clock:</h2>
+  <p>Add "?Date()" and a clock will appear!</p>
+  <hr>
+  <p>My stuff</p>
+  <h1>Games :D</h1>
+  <p>Here's <a href="tictactoe.html"><button>Tic-Tac-Toe</button></a></p>
+  <p>Here's <a href="wordle.html"><button>Wordle</button></a></p>
+  <p>Here's <a href="fruitmatch.html"><button>Fruit Match</button></a></p>
+  <h1>Utilities:</h1>
+  <p><a href="notes.html"><button>Notepad (Doesn't save, just for fun xD)</button></a></p>
+  <p><a href="clock.html"><button>Clock (Shows date and time)</button></a></p>
+  <p><a href="weather.html"><button>Weather (Uses IP to get approximate location)</button></a></p>
+  <h1>Developer tools:</h1>
+  <p><a href="file:///mnt/us/documents/javascript.html?localStorage.setItem('dev',location);document.title='Development\x20Environment\x200.2';lS=localStorage;lS.setItem('empty','');onload=function(){try{document.body.innerHTML='';d=document;T=function(){return(d.getElementsByTagName.apply(d,arguments))};b=d.body;c=function(){return(d.createElement.apply(d,arguments))};ih='innerHTML';ad=function(e,t,s){if(e=='button'){e='div';s='border:solid;display:inline-block;padding:10px;font-size:30px;margin:2px'};e=c(e);e[ih]=t||'';if(s){if(typeof(s)!='object')e.setAttribute('style',s);else{for((i)in(s))e.setAttribute(i,s[i])}};b.appendChild(e);return(e)};log=function(){ad('div',[].slice.call(arguments).join('\x20'))};ta=ad('textarea','');ta.setAttribute('style','width:100%;height:600px');{};ad('button','RUN\x20JS').onclick=function(){try{eval(ta.value)}catch(evalE){ad('div','Run\x20JS:\x20'+evalE)}};{};ad('button','Copy').onclick=function(){localStorage.setItem('clipboard',ta.selectionStart==ta.selectionEnd?ta.value:ta.value.substring(ta.selectionStart,ta.selectionEnd));alert('Copied\x20to\x20clipboard\x20localStorage')};{};ad('button','Paste').onclick=function(){pasted=localStorage.getItem('clipboard');ta.value=ta.value.substring(0,ta.selectionStart)+pasted+ta.value.substring(ta.selectionEnd,ta.value.length);ta.selectionStart=ta.selectionStart;ta.selectionEnd=ta.selectionStart+pasted.length};{};ad('button','Save\x20as').onclick=function(){f=prompt('localStorage\x20item:','srcview.js');if(f===false)return;localStorage.setItem(f,ta.value)};{};s=ad('select','\x3Coption\x20value=\x22Load\x22\x3ELoad\x3C/option\x3E');s.onfocus=function(){while(eval('1\x3Cs.options.length'))s.options.remove(1);for((i)in(l=Object.keys(localStorage)))s.add(new(Option)(l[i],l[i]))};s.onchange=function(){ta.value=localStorage.getItem(s.value)};{};ad('button','As\x20URL').onclick=function(){location.href=ta.value};{};list=function(el){l=[];for((i)in(el)){l.push(i)};return(l.sort())};{};ad('button','Select').onclick=function(){if(typeof(sst)=='undefined'){sst=1+ta.selectionStart;this[ih]='End\x20select'}else{ta.selectionEnd=Math.max(sst-1,ta.selectionEnd);ta.selectionStart=Math.min(ta.selectionStart,sst-1);sst=undefined;this[ih]='Select';ta.onfocus=(function(s,e){return(function(){setTimeout(function(){ta.selectionStart=s;ta.selectionEnd=e},10);ta.onfocus=undefined})})(ta.selectionStart,ta.selectionEnd);ta.blur()}};{};ad('br');{};{};T('textarea')[0].value=lS.getItem('srcview.js')}catch(e){alert(e)}}"><button>Self-Developing IDE</button></a></p>
+  <p></p>
+<script>
+document.write(location.search.substr(1)+"<br>"+"<pre>"+eval(location.search.substr(1))+"</pre>");
+</script>
+
+  <p>Copyright @2023 Arthur Jiang. <a href="https://skyhax.lol">My Digital Biology</a></p>
+  <p>P.S. the undefined message is normal</p>
+</html>

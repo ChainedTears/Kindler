@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Wordle Game</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+
+    #wordle-container {
+      margin-top: 20px;
+    }
+
+    #guess-input {
+      width: 100px;
+      padding: 5px;
+      font-size: 18px;
+      text-transform: uppercase;
+    }
+
+    #guess-button, #give-up-button, #restart-button {
+      margin: 10px;
+      padding: 5px 10px;
+      font-size: 16px;
+    }
+
+    .guess {
+      margin-top: 10px;
+    }
+
+    .correct {
+      color: green;
+    }
+
+    .present {
+      color: orange;
+    }
+
+    .incorrect {
+      color: red;
+    }
+    
+  </style>
+</head>
+<body>
+  <h1>Wordle Game</h1>
+  <div id="wordle-container">
+    <input type="text" id="guess-input" maxlength="5">
+    <button id="guess-button">Guess</button>
+    <button id="give-up-button">Give Up</button>
+    <button id="restart-button">Restart</button>
+  </div>
+  <div id="result"></div>
+  <div id="guesses"></div>
+
+  <br><br><br>
+    <h1>How to Play Wordle</h1>
+  <p>
+    Wordle is a word-guessing game that challenges players to decipher a hidden five-letter word within a limited number of attempts. The objective is to use deduction and logical thinking to uncover the mystery word.
+  </p>
+  <ol>
+    <li><strong>Word Selection:</strong> At the start of each game, a random five-letter word is chosen from a predefined list. The player's task is to guess this word within a specified number of tries, usually six.</li>
+    <li><strong>Making Guesses:</strong> The player can input their guesses into the provided text input field. Each guess should consist of a five-letter word containing uppercase letters only. The player may attempt to guess the word multiple times until they either discover the hidden word or exhaust their attempts.</li>
+    <li><strong>Feedback and Clues:</strong> After submitting a guess, the game will provide feedback to assist the player in narrowing down the possibilities. The feedback will indicate which letters are correctly placed and which letters exist in the target word but are positioned differently.
+      <ul>
+        <li><span style="color: green;">Correct letters:</span> If a guessed letter is in the correct position, it is highlighted in green.</li>
+        <li><span style="color: orange;">Present letters:</span> If a guessed letter exists in the word but is in the wrong position, it is highlighted in orange.</li>
+        <li><span style="color: red;">Incorrect letters:</span> Letters that do not appear in the target word are marked in red.</li>
+      </ul>
+    </li>
+    <li><strong>Guessing Strategy:</strong> Players need to strategize their guesses based on the feedback received. By analyzing the results from previous attempts, they can eliminate possibilities and make informed guesses. With each new guess, players should pay attention to the feedback to deduce the word more efficiently.</li>
+    <li><strong>Give Up:</strong> If the player is unable to guess the word within the allotted attempts, they have the option to give up. By clicking the "Give Up" button, the game reveals the hidden word, letting the player see what they were trying to find.</li>
+    <li><strong>Restart:</strong> At any point during the game, players can choose to restart by clicking the "Restart" button. This will initiate a new game with a different random word, clearing all previous guesses.</li>
+    <li><strong>Victory:</strong> The game concludes when the player correctly guesses the word within the maximum attempts. Upon victory, the game displays a congratulatory message, along with the number of attempts it took to solve the puzzle.</li>
+  </ol>
+  <script>
+    // Wordle Game logic
+    var targetWord = getRandomWord(); // Replace this with a word from your word list
+    var attempts = 0;
+    var maxAttempts = 6;
+    var previousGuesses = [];
+
+    // Function to generate a random word (for demonstration purposes)
+    function getRandomWord() {
+      var words = [
+  "APPLE", "FIVES", "GRAPE", "CATCH", "QUICK", "BREAD", "PLUMB", "SLICE", "NORTH", "BEACH",
+  "CLOCK", "DRIVE", "HORSE", "LAUGH", "MOUSE", "SMILE", "TRAIN", "WORLD", "YOUNG", "ALARM",
+  "BLAZE", "CRANE", "DREAM", "EAGLE", "FRUIT", "GHOST", "HEART", "IMAGE", "JOKER", "KINGS",
+  "LOVER", "MAGIC", "NIGHT", "OCEAN", "PANDA", "QUART", "ROSES", "SLEEP", "THUMB", "UMBRA",
+  "VITAL", "WATER", "XENON", "YEAST", "ZEBRA", "ARGUE", "BANDS", "CHAOS", "DELAY", "ETHER",
+  "FLAME", "GOALS", "HAUNT", "IRONY", "JOLLY", "KOALA", "LUNCH", "MUSIC", "NIXON", "OLIVE",
+  "PLUTO", "QUEEN", "RAVEN", "SHARK", "TIGER", "UNZIP", "VENUS", "WALTZ", "XEROX", "YACHT",
+  "ZESTY", "APPLE", "BRAVE", "CHAMP", "DESKS", "EVOKE", "FLAME", "GRACE", "HEART", "IMAGE",
+  "JOKER", "KINGS", "LOVER", "MAGIC", "NIGHT", "OCEAN", "PANDA", "QUART", "ROSES", "SLEEP",
+  "THUMB", "UMBRA", "VITAL", "WATER", "XENON", "YEAST", "ZEBRA", "ARGUE", "BANDS", "CHAOS",
+  "DELAY", "ETHER", "FLAME", "GOALS", "HAUNT", "IRONY", "JOLLY", "KOALA", "LUNCH", "MUSIC",
+  "NIXON", "OLIVE", "PLUTO", "QUEEN", "RAVEN", "SHARK", "TIGER", "UNZIP", "VENUS", "WALTZ",
+  "XEROX", "YACHT", "ZESTY"
+];
+
+      var randomIndex = Math.floor(Math.random() * words.length);
+      return words[randomIndex];
+    }
+
+    // Function to check the guessed word
+    function checkWord() {
+      var guess = document.getElementById('guess-input').value.toUpperCase();
+      var result = '';
+
+      if (guess.length !== 5) {
+        result = "Please enter a 5-letter word.";
+      } else {
+        attempts++;
+        if (guess === targetWord) {
+          result = "Congratulations! You guessed the word '" + targetWord + "' in " + attempts + " attempts.";
+        } else {
+          result = getResultString(guess);
+        }
+      }
+
+      document.getElementById('result').innerHTML = result;
+      previousGuesses.push({ guess: guess, result: result });
+      updateGuesses();
+
+      if (attempts >= maxAttempts) {
+        document.getElementById('result').innerHTML = "Sorry, you've used all your attempts. The word was '" + targetWord + "'.";
+        document.getElementById('guess-input').disabled = true;
+        document.getElementById('guess-button').disabled = true;
+        document.getElementById('give-up-button').disabled = true;
+      }
+    }
+
+    // Function to get the result string
+    function getResultString(guess) {
+      var result = '';
+      for (var i = 0; i < 5; i++) {
+        if (guess[i] === targetWord[i]) {
+          result += '<span class="correct">' + guess[i] + '</span>';
+        } else if (targetWord.indexOf(guess[i]) !== -1) {
+          result += '<span class="present">' + guess[i] + '</span>';
+        } else {
+          result += '<span class="incorrect">' + guess[i] + '</span>';
+        }
+      }
+      return result;
+    }
+
+    // Function to update the displayed guesses
+    function updateGuesses() {
+      var guessesContainer = document.getElementById('guesses');
+      guessesContainer.innerHTML = '';
+      for (var i = 0; i < previousGuesses.length; i++) {
+        var guessDiv = document.createElement('div');
+        guessDiv.classList.add('guess');
+        guessDiv.innerHTML = '<strong>Attempt ' + (i + 1) + ':</strong> ' + previousGuesses[i].guess + ' - ' + previousGuesses[i].result;
+        guessesContainer.appendChild(guessDiv);
+      }
+    }
+
+    // Function to reveal the target word
+    function giveUp() {
+      document.getElementById('result').innerHTML = "The word was '" + targetWord + "'.";
+      document.getElementById('guess-input').disabled = true;
+      document.getElementById('guess-button').disabled = true;
+      document.getElementById('give-up-button').disabled = true;
+    }
+
+    // Function to restart the game
+    function restart() {
+      targetWord = getRandomWord();
+      attempts = 0;
+      previousGuesses = [];
+      document.getElementById('guess-input').value = '';
+      document.getElementById('result').innerHTML = '';
+      document.getElementById('guess-input').disabled = false;
+      document.getElementById('guess-button').disabled = false;
+      document.getElementById('give-up-button').disabled = false;
+      updateGuesses();
+    }
+
+    document.getElementById('guess-button').addEventListener('click', checkWord);
+    document.getElementById('give-up-button').addEventListener('click', giveUp);
+    document.getElementById('restart-button').addEventListener('click', restart);
+  </script>
+</body>
+</html>
