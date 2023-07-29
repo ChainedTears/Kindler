@@ -2,7 +2,7 @@
 A multi-tool with games and utilites I made for a Kindle Paperwhite while I was bored offline ;)
 
 # Installation Instructions
-To install, download the source code of this Github repository, extract the zip file and copy/paste the whole content inside the root directory of your kindle with your computer.
+To install, download the source code of this Github repository, extract the zip file and copy/paste the whole content inside the root directory of your kindle with your computer. (You can remove the 2 showcase images)
 
 # Usage Guide
 To use Kindler, simply launch the `Experimental Browser` app on your Kindle. Then, type in this URL: 
